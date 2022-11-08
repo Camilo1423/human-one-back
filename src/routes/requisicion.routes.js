@@ -8,7 +8,8 @@ import {
     requisicionDelete, 
     requisicionGet, 
     requisicionGetPublish,
-    requisicionNoPublish
+    requisicionNoPublish,
+    requisicionSingelGet
 } from '../controller/requisicion.controller.js'
 
 const router = Router()
@@ -19,6 +20,7 @@ router.put('/publish/:id', requisicionPublish)
 router.put('/nopublish/:id', requisicionNoPublish)
 router.delete('/delete/:id', requisicionDelete)
 router.get('/allreq', requisicionGet)
+router.get('/allreq/:id', requisicionSingelGet)
 router.get('/allreqpublish', requisicionGetPublish)
 
 export default router

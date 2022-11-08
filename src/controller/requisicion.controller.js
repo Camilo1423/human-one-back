@@ -37,7 +37,14 @@ const requisicionDelete = async (req, res) => {
 
 const requisicionGet = async (req, res) => {
     const requisicion = await Requisicion.find()
-    return res.json({...requisicion})
+    return res.json(requisicion)
+}
+
+const requisicionSingelGet = async (req, res) => {
+    const requisicion = await Requisicion.findOne({_id: {
+        $eq: req.params.id
+    }})
+    return res.json(requisicion)
 }
 
 const requisicionGetPublish = async (req, res) => {
@@ -45,7 +52,7 @@ const requisicionGetPublish = async (req, res) => {
         $eq: true
     }})
     if (Object.keys(requisicion).length > 0) {
-        return res.json({...requisicion})
+        return res.json(requisicion)
     } else {
         return res.json({estado: "no hay registros"})
     }
@@ -58,5 +65,6 @@ export {
     requisicionDelete,
     requisicionGet,
     requisicionGetPublish,
-    requisicionNoPublish
+    requisicionNoPublish,
+    requisicionSingelGet
 }

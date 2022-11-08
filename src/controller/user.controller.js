@@ -18,6 +18,17 @@ const userRegister = async (req, res) => {
     }
 }
 
+const userRegisterFront = async (req, res) => {
+    try {
+        const { username, nombre, apellido, cedula, correo, direccion, password } = req.body
+        const dataUser = { username, nombre, apellido, cedula, correo, direccion }
+        await Usuario.create({...dataUser, role: 'candidato', password: await bcrypt.hash(password, 8)})
+        return res.json({...dataUser})
+    } catch {
+        return res.json({ status: "fallo con el servidor"})
+    }
+}
+
 const userLogin = async (req, res) => {
     const findUser = await Usuario.findOne({ username: req.body.username })
     if (findUser) {
@@ -71,7 +82,8 @@ export {
     userUpdate,
     userDelete,
     userGet,
-    userSingleGet
+    userSingleGet,
+    userRegisterFront
 }
 
 

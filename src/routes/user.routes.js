@@ -1,11 +1,12 @@
 import { Router } from 'express'
 
 // importacion de controlador
-import { userRegister, userLogin, userUpdate, userDelete, userGet, userSingleGet } from '../controller/user.controller.js'
+import { userRegister, userLogin, userUpdate, userDelete, userGet, userSingleGet, userRegisterFront} from '../controller/user.controller.js'
 
 const router = Router()
 
 router.post('/register', userRegister)
+router.post('/register/front', userRegisterFront)
 router.post('/login', userLogin)
 router.put('/update/:id', userUpdate)
 router.delete('/delete/:id', userDelete)
