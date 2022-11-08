@@ -3,6 +3,7 @@ dotenv.config()
 import express from "express"
 import mongoose from "mongoose"
 import morgan from "morgan"
+import cors from 'cors';
 
 // instaciando express
 const app = express()
@@ -10,7 +11,8 @@ const app = express()
 // importacion de rutas
 import { userRoute, perfilReqRoute, requisicionRoute } from './routes/routes.js'
 
-// settings
+// midelwares
+app.use(cors())
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

@@ -23,12 +23,20 @@ const perfilDelete = async (req, res) => {
 
 const perfilGet = async (req, res) => {
     const perfiles = await PerfilReq.find()
-    return res.json({...perfiles})
+    return res.json(perfiles)
+}
+
+const perfilSingleGet = async (req, res) => {
+    const perfiles = await PerfilReq.findOne({_id: {
+        $eq: req.params.id
+    }})
+    return res.json(perfiles)
 }
 
 export {
     perfilRegister,
     perfilUpdate,
     perfilDelete,
-    perfilGet
+    perfilGet,
+    perfilSingleGet
 }

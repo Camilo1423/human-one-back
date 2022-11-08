@@ -37,8 +37,7 @@ const userUpdate = async (req, res) => {
         await Usuario.updateOne({_id: {
             $eq: req.params.id
         }},{ username, nombre, apellido, role, cedula, correo, direccion }, {runValidators: true})
-        const data = { username, nombre, apellido, role, cedula, correo, direccion }
-        return res.json({...data})
+        return res.json({status: "done"})
     } else {
         res.json({status: "No eres administrador del sistema"})
     }
@@ -55,11 +54,15 @@ const userDelete = async (req, res) => {
 }
 
 const userGet = async (req, res) => {
-    const findUserAdmin = await Usuario.findOne({ username: req.body.usernameAdmin})
-    if(findUserAdmin.role == "admin") {
-        const resultado = await Usuario.find()
-        return res.json(resultado)
-    }
+    const resultado = await Usuario.find()
+    return res.json(resultado)
+}
+
+const userSingleGet = async (req, res) => {
+    const resultado = await Usuario.findOne({_id: {
+        $eq: req.params.id
+    }})
+    return res.json(resultado)
 }
 
 export {
@@ -67,5 +70,8 @@ export {
     userLogin,
     userUpdate,
     userDelete,
-    userGet
+    userGet,
+    userSingleGet
 }
+
+
